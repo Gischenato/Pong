@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.HexFormat;
 
 import javax.swing.JFrame;
 
@@ -19,6 +20,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
     public Player player;
     public Enemy enemy;
+    public Ball ball;
 
     public Game(){
         this.setPreferredSize(new Dimension(WIDHT*SCALE ,HEIGHT*SCALE));
@@ -26,6 +28,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
         player = new Player(100, HEIGHT-10);
         enemy = new Enemy(100, 0);
+        ball = new Ball(WIDHT/2 , HEIGHT/2 - 1);
 
         layer = new BufferedImage(WIDHT, HEIGHT, BufferedImage.TYPE_INT_RGB);
     }
@@ -47,6 +50,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
     public void update(){
         player.update();
         enemy.update();
+        ball.update();
     }
 
     public void render(){
@@ -63,6 +67,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
         //Renderizando o planer, enemy
         player.render(g);
         enemy.render(g);
+        ball.render(g);
 
         //Desenhando na tela
         g = bs.getDrawGraphics();
