@@ -9,7 +9,7 @@ public class Ball {
      public int widht, height;
 
      public double dx, dy;
-     public final double SPEED = 1.6;
+     public final double SPEED = 2.2;
 
 
      public Ball(int x, int y){
@@ -18,8 +18,9 @@ public class Ball {
           this.widht = 5;
           this.height = 5;
 
-          this.dx = new Random().nextGaussian(); 
-          this.dy = new Random().nextGaussian();
+          int angle = new Random().nextInt(120 -45) + 45;
+          this.dx = Math.cos(Math.toRadians(angle)); 
+          this.dy = Math.sin(Math.toRadians(angle));
      }
 
      public void update(){
@@ -45,12 +46,31 @@ public class Ball {
           Rectangle playerBounds = new Rectangle(Game.player.x, Game.player.y, Game.player.widht, Game.player.height);
           Rectangle enemyBounds = new Rectangle((int)Game.enemy.x, (int)Game.enemy.y, Game.enemy.widht, Game.enemy.height);
           
+          Double ballCenter = bounds.getCenterX();
+          Double playerCenter = playerBounds.getCenterX();
+          Double enemyCenter = enemyBounds.getCenterX();
 
-          if(bounds.intersects(playerBounds) || bounds.intersects(enemyBounds)) dy *= -1;
+          if(bounds.intersects(playerBounds) || bounds.intersects(enemyBounds)){
+               dy *= -1;
+               if(ballCenter >= playerCenter) mudaDx(false);
+               else if(ballCenter < playerCenter) mudaDx(true);
+               else if(ballCenter >= enemyCenter) mudaDx(true);
+               else if(ballCenter < enemyCenter) mudaDx(false);
+
+          }
 
 
           x += dx*SPEED;
           y += dy*SPEED;
+     }
+
+     public void mudaDx(Boolean esquerda){
+          if(esquerda){
+               dx  = Math.cos(Math.toRadians(new Random().nextInt(70) + 110));
+               System.out.println(dx);
+          }else{
+               dx = Math.cos(Math.toRadians(new Random().nextInt(75)));
+          }
      }
      
      public void render(Graphics g){
