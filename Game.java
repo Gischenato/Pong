@@ -18,12 +18,14 @@ public class Game extends Canvas implements Runnable, KeyListener{
     public BufferedImage layer;
 
     public Player player;
+    public Enemy enemy;
 
     public Game(){
         this.setPreferredSize(new Dimension(WIDHT*SCALE ,HEIGHT*SCALE));
         this.addKeyListener(this);
 
         player = new Player(100, HEIGHT-10);
+
         layer = new BufferedImage(WIDHT, HEIGHT, BufferedImage.TYPE_INT_RGB);
     }
 
@@ -41,8 +43,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
         new Thread(game).start();
     }
 
-    public void tick(){
-        player.tick();
+    public void update(){
+        player.update();
     }
 
     public void render(){
@@ -65,7 +67,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
     @Override
     public void run(){
         while(true){
-            tick();
+            update();
             render();
             try {
                 Thread.sleep(1000/60);

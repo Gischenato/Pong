@@ -15,13 +15,17 @@ public class Player {
           this.height = 10;
      }
 
-     public void tick(){
+     public void update(){
           if (moveRight){
                x++;
           }
           else if(moveLeft){
                x--;
           }
+
+          //Checando colisao com parede
+          if(x + widht > Game.WIDHT) x = Game.WIDHT - widht;
+          if(x < 0) x = 0;
      }    
 
 
