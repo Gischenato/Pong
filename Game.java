@@ -25,6 +25,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
         this.addKeyListener(this);
 
         player = new Player(100, HEIGHT-10);
+        enemy = new Enemy(100, 0);
 
         layer = new BufferedImage(WIDHT, HEIGHT, BufferedImage.TYPE_INT_RGB);
     }
@@ -45,6 +46,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
     public void update(){
         player.update();
+        enemy.update();
     }
 
     public void render(){
@@ -54,10 +56,15 @@ public class Game extends Canvas implements Runnable, KeyListener{
             return;
         }
         Graphics g = layer.getGraphics();
+        //Renderizando o fundo
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, WIDHT, HEIGHT);
+        
+        //Renderizando o planer, enemy
         player.render(g);
+        enemy.render(g);
 
+        //Desenhando na tela
         g = bs.getDrawGraphics();
         g.drawImage(layer, 0, 0, WIDHT*SCALE, HEIGHT*SCALE, null);
         
