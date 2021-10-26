@@ -14,7 +14,8 @@ public class Enemy {
      }
 
      public void update(){
-
+          x += (Game.ball.x - x - 6) * 0.4;
+          
      }
      
      public void render(Graphics g){

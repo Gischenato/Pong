@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.HexFormat;
 
 import javax.swing.JFrame;
 
@@ -18,9 +17,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
     public BufferedImage layer;
 
-    public Player player;
-    public Enemy enemy;
-    public Ball ball;
+    public static Player player;
+    public static Enemy enemy;
+    public static Ball ball;
 
     public Game(){
         this.setPreferredSize(new Dimension(WIDHT*SCALE ,HEIGHT*SCALE));

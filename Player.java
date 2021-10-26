@@ -8,19 +8,22 @@ public class Player {
 
      public int widht, height;
 
+     public final int SPEED;
+
      public Player(int x, int y) {
           this.x = x;
           this.y = y;
           this.widht = 50;
           this.height = 10;
+          this.SPEED = 2;
      }
 
      public void update(){
           if (moveRight){
-               x++;
+               x += SPEED;
           }
           else if(moveLeft){
-               x--;
+               x -= SPEED;
           }
 
           //Checando colisao com parede
